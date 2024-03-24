@@ -190,7 +190,6 @@ pipeline {
                                     <table>
                                         <tr>
                                             <th>File Name</th>
-                                            <th>File Path</th>
                                             <th>Vulnerability Name</th>
                                             <th>Severity</th>
                                             <th>Description</th>
@@ -297,7 +296,6 @@ def extractOWASPVulnerabilities(reportFile) {
             dependency.vulnerabilities
         }.each { dependency ->
             def fileName = dependency.fileName
-            def filePath = dependency.filePath
             def dependencyVulnerabilities = dependency.vulnerabilities
 
             if (dependencyVulnerabilities) {
@@ -319,7 +317,6 @@ def generateHTMLTableRows(vulnerabilities) {
                 tableRows += "<tr>"
             }
             tableRows += "<td>${fileName}</td>"
-            tableRows += "<td>${vuln.filePath}</td>"
             tableRows += "<td>${vuln.name}</td>"
             tableRows += "<td>${vuln.severity}</td>"
             tableRows += "<td>${vuln.description}</td>"
