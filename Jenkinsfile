@@ -189,11 +189,11 @@ pipeline {
                                     <h3>OWASP Dependency Check</h3>
                                     <table>
                                         <tr>
-                                            <th>Commit ID</th>
-                                            <th>Author</th>
-                                            <th>Message</th>
-                                            <th>Files</th>
-                                            <th>Timestamp</th>
+                                            <th>File Name</th>
+                                            <th>File Path</th>
+                                            <th>Vulnerability Name</th>
+                                            <th>Severity</th>
+                                            <th>Description</th>
                                         </tr>
                                         ${env.VULNERABILITIES_TABLE ?: "<tr><td colspan=\"5\">No vulnerabilities found</td></tr>"}
                                     </table>
