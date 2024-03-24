@@ -279,7 +279,9 @@ def extractOWASPVulnerabilities(reportFile) {
     def jsonReport = readFile(file: reportFile)
     def json = readJSON text: jsonReport
 
-    json.each { dependency ->
+    json.dependencies.findAll { dependency ->
+        dependency.vulnerabilities
+    }.each { dependency ->
         def fileName = dependency.fileName
         def filePath = dependency.filePath
         def dependencyVulnerabilities = dependency.vulnerabilities
@@ -293,6 +295,7 @@ def extractOWASPVulnerabilities(reportFile) {
 
     return vulnerabilities
 }
+
 
 def generateHTMLTableRows(vulnerabilities) {
     def tableRows = ""
