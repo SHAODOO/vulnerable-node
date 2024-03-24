@@ -36,15 +36,17 @@ pipeline {
                 dependencyCheck additionalArguments: '--scan \"${WORKSPACE}\" --prettyPrint --format JSON --format XML', odcInstallation: 'Dependency-Check-Installation'
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
 
-                // Extract vulnerability information from OWASP Dependency Check report
-                def reportFile = "${WORKSPACE}/dependency-check-report.json"
-                def vulnerabilities = extractOWASPVulnerabilities(reportFile)
+                script {
+                    // Extract vulnerability information from OWASP Dependency Check report
+                    def reportFile = "${WORKSPACE}/dependency-check-report.json"
+                    def vulnerabilities = extractOWASPVulnerabilities(reportFile)
 
-                // Generate HTML table for vulnerabilities
-                def vulnerabilitiesTable = generateHTMLTable(vulnerabilities)
+                    // Generate HTML table for vulnerabilities
+                    def vulnerabilitiesTable = generateHTMLTable(vulnerabilities)
 
-                // Store vulnerabilities as a build variable for later use
-                env.VULNERABILITIES_TABLE = vulnerabilitiesTable
+                    // Store vulnerabilities as a build variable for later use
+                    env.VULNERABILITIES_TABLE = vulnerabilitiesTable
+                }
             }
         }
 
