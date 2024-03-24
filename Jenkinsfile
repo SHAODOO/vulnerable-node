@@ -32,8 +32,19 @@ pipeline {
                 expression { params.OWASP_DEPENDENCY_CHECK == true }
             }
             steps {
+                // Run OWASP Dependency Check
                 dependencyCheck additionalArguments: '--scan \"${WORKSPACE}\" --prettyPrint --format JSON --format XML', odcInstallation: 'Dependency-Check-Installation'
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+
+                // Extract vulnerability information from OWASP Dependency Check report
+                def reportFile = "${WORKSPACE}/dependency-check-report.json"
+                def vulnerabilities = extractOWASPVulnerabilities(reportFile)
+
+                // Generate HTML table for vulnerabilities
+                def vulnerabilitiesTable = generateHTMLTable(vulnerabilities)
+
+                // Store vulnerabilities as a build variable for later use
+                env.VULNERABILITIES_TABLE = vulnerabilitiesTable
             }
         }
 
@@ -80,13 +91,6 @@ pipeline {
     post {
         always {
             script {
-                // Extract vulnerability information from OWASP Dependency Check report
-                def reportFile = 'dependency-check-report.json'
-                def vulnerabilities = extractOWASPVulnerabilities(reportFile)
-
-                // Generate HTML table for vulnerabilities
-                def vulnerabilitiesTable = generateHTMLTable(vulnerabilities)
-
                 // Send email notification with vulnerability information
                 emailext(
                     to: 'ahdoo.ling010519@gmail.com',
@@ -182,7 +186,7 @@ pipeline {
 
                                     <h3>OWASP Dependency Check</h3>
                                     <table>
-                                        ${vulnerabilitiesTable}
+                                        ${env.VULNERABILITIES_TABLE ?: "<tr><td colspan=\"5\">No vulnerabilities found</td></tr>"}
                                     </table>
 
                                     <h3>Snyk</h3>
@@ -274,47 +278,4 @@ def getStatusColor() {
     }
 }
 
-def extractOWASPVulnerabilities(reportFile) {
-    def vulnerabilities = [:]
-    node {
-        def jsonReport = readFile(file: reportFile)
-        def json = readJSON text: jsonReport
-
-        json.dependencies.findAll { dependency ->
-            dependency.vulnerabilities
-        }.each { dependency ->
-            def fileName = dependency.fileName
-            def filePath = dependency.filePath
-            def dependencyVulnerabilities = dependency.vulnerabilities
-
-            if (dependencyVulnerabilities) {
-                vulnerabilities[fileName] = dependencyVulnerabilities.collect { vuln ->
-                    return [name: vuln.name, severity: vuln.severity, description: vuln.description]
-                }
-            }
-        }
-    }
-
-    return vulnerabilities
-}
-
-
-
-def generateHTMLTableRows(vulnerabilities) {
-    def tableRows = ""
-    vulnerabilities.each { fileName, vulns ->
-        vulns.eachWithIndex { vuln, index ->
-            if (index > 0) {
-                tableRows += "<tr>"
-            }
-            tableRows += "<td>${fileName}</td>"
-            tableRows += "<td>${vuln.filePath}</td>"
-            tableRows += "<td>${vuln.name}</td>"
-            tableRows += "<td>${vuln.severity}</td>"
-            tableRows += "<td>${vuln.description}</td>"
-            tableRows += "</tr>"
-        }
-    }
-    return tableRows
-}
 
