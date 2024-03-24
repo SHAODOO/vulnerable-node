@@ -278,4 +278,45 @@ def getStatusColor() {
     }
 }
 
+def extractOWASPVulnerabilities(reportFile) {
+    def vulnerabilities = [:]
+    node {
+        def jsonReport = readFile(file: reportFile)
+        def json = readJSON text: jsonReport
+
+        json.dependencies.findAll { dependency ->
+            dependency.vulnerabilities
+        }.each { dependency ->
+            def fileName = dependency.fileName
+            def filePath = dependency.filePath
+            def dependencyVulnerabilities = dependency.vulnerabilities
+
+            if (dependencyVulnerabilities) {
+                vulnerabilities[fileName] = dependencyVulnerabilities.collect { vuln ->
+                    return [name: vuln.name, severity: vuln.severity, description: vuln.description]
+                }
+            }
+        }
+    }
+
+    return vulnerabilities
+}
+
+def generateHTMLTableRows(vulnerabilities) {
+    def tableRows = ""
+    vulnerabilities.each { fileName, vulns ->
+        vulns.eachWithIndex { vuln, index ->
+            if (index > 0) {
+                tableRows += "<tr>"
+            }
+            tableRows += "<td>${fileName}</td>"
+            tableRows += "<td>${vuln.filePath}</td>"
+            tableRows += "<td>${vuln.name}</td>"
+            tableRows += "<td>${vuln.severity}</td>"
+            tableRows += "<td>${vuln.description}</td>"
+            tableRows += "</tr>"
+        }
+    }
+    return tableRows
+}
 
