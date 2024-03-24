@@ -310,14 +310,8 @@ def extractOWASPVulnerabilities(reportFile) {
 }
 
 def generateHTMLTableRows(vulnerabilities) {
-    // Define a map to assign numeric values to severity levels
-    def severityOrder = ['low': 0, 'MEDIUM': 1, 'HIGH': 2]
-
     def tableRows = ""
-    vulnerabilities.each { fileName, vulns ->
-        // Sort vulnerabilities by severity using the custom order
-        vulns.sort { a, b -> severityOrder[a.severity] <=> severityOrder[b.severity] }
-        
+    vulnerabilities.each { fileName, vulns ->        
         vulns.eachWithIndex { vuln, index ->
             if (index > 0) {
                 tableRows += "<tr>"
