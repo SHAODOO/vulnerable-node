@@ -81,7 +81,7 @@ pipeline {
         always {
             script {
                 // Extract vulnerability information from OWASP Dependency Check report
-                def reportFile = '\"${WORKSPACE}\"dependency-check-report.json'
+                def reportFile = '\"${WORKSPACE}\"/dependency-check-report.json'
                 def vulnerabilities = extractOWASPVulnerabilities(reportFile)
 
                 // Generate HTML table for vulnerabilities
