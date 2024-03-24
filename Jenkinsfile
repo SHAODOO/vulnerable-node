@@ -312,6 +312,9 @@ def extractOWASPVulnerabilities(reportFile) {
 def generateHTMLTableRows(vulnerabilities) {
     def tableRows = ""
     vulnerabilities.each { fileName, vulns ->
+        // Sort vulnerabilities by severity
+        vulns.sort { a, b -> a.severity <=> b.severity }
+        
         vulns.eachWithIndex { vuln, index ->
             if (index > 0) {
                 tableRows += "<tr>"
