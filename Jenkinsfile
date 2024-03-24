@@ -232,7 +232,7 @@ def getGitChangeSetTable() {
                 }.join(", ")
                 def author = entry.author.fullName
                 def message = entry.msg
-                def commitUrl = "https://github.com/SHAODOO/WebGoat/commit/${id}"
+                def commitUrl = "https://github.com/SHAODOO/vulnerable-node/commit/${id}"
                 "<tr><td><a href=\"${commitUrl}\">${id}</a></td><td>${author}</td><td>${message}</td><td>${files}</td><td>${formattedTimestamp}</td></tr>"
             }.join('\n')
         }.join('\n')
@@ -250,7 +250,7 @@ def getGitChangeSetTable() {
                         def author = entry.author.fullName
                         def message = entry.msg
                         // Construct GitHub commit URL
-                        def commitUrl = "https://github.com/SHAODOO/WebGoat-node/commit/${id}"
+                        def commitUrl = "https://github.com/SHAODOO/vulnerable-node/commit/${id}"
                         "<tr><td><a href=\"${commitUrl}\">${id}</a></td><td>${author}</td><td>${message}</td><td>${files}</td><td>${formattedTimestamp}</td></tr>"
                     }.join('\n')
                 }.join('\n')
