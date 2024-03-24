@@ -188,6 +188,13 @@ pipeline {
 
                                     <h3>OWASP Dependency Check</h3>
                                     <table>
+                                        <tr>
+                                            <th>Commit ID</th>
+                                            <th>Author</th>
+                                            <th>Message</th>
+                                            <th>Files</th>
+                                            <th>Timestamp</th>
+                                        </tr>
                                         ${env.VULNERABILITIES_TABLE ?: "<tr><td colspan=\"5\">No vulnerabilities found</td></tr>"}
                                     </table>
 
@@ -306,13 +313,13 @@ def extractOWASPVulnerabilities(reportFile) {
 
 def generateHTMLTableRows(vulnerabilities) {
     def tableRows = ""
-    vulnerabilities.each { fileName, vulns ->
+    vulnerabilities.each { fileName, filePath, vulns ->
         vulns.eachWithIndex { vuln, index ->
             if (index > 0) {
                 tableRows += "<tr>"
             }
             tableRows += "<td>${fileName}</td>"
-            tableRows += "<td>${vuln.filePath}</td>"
+            tableRows += "<td>${filePath}</td>"
             tableRows += "<td>${vuln.name}</td>"
             tableRows += "<td>${vuln.severity}</td>"
             tableRows += "<td>${vuln.description}</td>"
