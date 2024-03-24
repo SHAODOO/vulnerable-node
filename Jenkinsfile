@@ -194,7 +194,7 @@ pipeline {
                                             <th>Severity</th>
                                             <th>Description</th>
                                         </tr>
-                                        ${env.VULNERABILITIES_TABLE ?: "<tr><td colspan=\"5\">No vulnerabilities found</td></tr>"}
+                                        ${env.VULNERABILITIES_TABLE ?: "<tr><td colspan=\"4\">No vulnerabilities found</td></tr>"}
                                     </table>
 
                                     <h3>Snyk</h3>
