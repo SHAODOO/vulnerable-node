@@ -79,6 +79,14 @@ pipeline {
 
     post {
         always {
+            // Extract vulnerability information from OWASP Dependency Check report
+            def reportFile = "${WORKSPACE}/dependency-check-report.json"
+            def vulnerabilities = extractOWASPVulnerabilities(reportFile)
+
+            // Generate HTML table for vulnerabilities
+            def vulnerabilitiesTable = generateHTMLTable(vulnerabilities)
+
+            // Send email notification with vulnerability information
             emailext(
                 to: 'ahdoo.ling010519@gmail.com',
                 mimeType: 'text/html',
@@ -173,6 +181,7 @@ pipeline {
 
                                 <h3>OWASP Dependency Check</h3>
                                 <table>
+                                    ${vulnerabilitiesTable}
                                 </table>
 
                                 <h3>Snyk</h3>
@@ -261,5 +270,43 @@ def getStatusColor() {
         default:
             return 'black'; // default color
     }
+}
+
+def extractOWASPVulnerabilities(reportFile) {
+    def vulnerabilities = [:]
+    def jsonReport = readFile(file: reportFile)
+    def json = readJSON text: jsonReport
+
+    json.each { dependency ->
+        def fileName = dependency.fileName
+        def filePath = dependency.filePath
+        def dependencyVulnerabilities = dependency.vulnerabilities
+
+        if (dependencyVulnerabilities) {
+            vulnerabilities[fileName] = dependencyVulnerabilities.collect { vuln ->
+                return [name: vuln.name, severity: vuln.severity, description: vuln.description]
+            }
+        }
+    }
+
+    return vulnerabilities
+}
+
+def generateHTMLTableRows(vulnerabilities) {
+    def tableRows = ""
+    vulnerabilities.each { fileName, vulns ->
+        vulns.eachWithIndex { vuln, index ->
+            if (index > 0) {
+                tableRows += "<tr>"
+            }
+            tableRows += "<td>${fileName}</td>"
+            tableRows += "<td>${vuln.filePath}</td>"
+            tableRows += "<td>${vuln.name}</td>"
+            tableRows += "<td>${vuln.severity}</td>"
+            tableRows += "<td>${vuln.description}</td>"
+            tableRows += "</tr>"
+        }
+    }
+    return tableRows
 }
 
