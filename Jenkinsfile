@@ -379,7 +379,7 @@ def generateSnykHTMLTableRows(snykVulnerabilities) {
         tableRows += "<td>${vulnerability.level}</td>"
         tableRows += "<td>${vulnerability.message}</td>"
         tableRows += "<td>${vulnerability.artifactUri}</td>"
-        tableRows += "<td>${vulnerability.startLine}:${vulnerability.startColumn} - ${vulnerability.endLine}:${vulnerability.endColumn}</td>"
+        tableRows += "<td>Ln ${vulnerability.startLine}, Col ${vulnerability.startColumn} - Ln ${vulnerability.endLine}, Col ${vulnerability.endColumn}</td>"
         tableRows += "</tr>"
     }
     return tableRows
