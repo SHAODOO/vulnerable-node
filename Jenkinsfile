@@ -61,6 +61,18 @@ pipeline {
                         ${SNYK}/snyk-win.exe code test ${WORKSPACE} --json-file-output=${WORKSPACE}/snyk-report.json
                     """
                 }
+
+                script {
+                    // Extract Snyk vulnerabilities
+                    def reportFile = "${WORKSPACE}/snyk-report.json"
+                    def snykVulnerabilities = extractSnykVulnerabilities(reportFile)
+
+                    // Generate HTML table for Snyk vulnerabilities
+                    def snykTableRows = generateSnykHTMLTableRows(snykVulnerabilities)
+
+                    // Store Snyk vulnerabilities as a build variable for later use
+                    env.SNYK_TABLE = snykTableRows
+                }
             }
         }
 
@@ -199,6 +211,14 @@ pipeline {
 
                                     <h3>Snyk</h3>
                                     <table>
+                                        <tr>
+                                            <th>Rule ID</th>
+                                            <th>Level</th>
+                                            <th>Message</th>
+                                            <th>File</th>
+                                            <th>Location</th>
+                                        </tr>
+                                        ${env.SNYK_TABLE ?: "<tr><td colspan=\"5\">No vulnerabilities found</td></tr>"}
                                     </table>
 
                                     <h3>Trivy</h3>
@@ -326,4 +346,42 @@ def generateHTMLTableRows(vulnerabilities) {
     return tableRows
 }
 
+// Function to extract Snyk vulnerabilities from the report file
+def extractSnykVulnerabilities(reportFile) {
+    def vulnerabilities = []
+    def reportContent = readFile(file: reportFile)
+    def reportJson = readJSON text: reportContent
+    
+    reportJson.runs.each { run ->
+        run.results.each { result ->
+            def vulnerability = [:]
+            vulnerability['ruleId'] = result.ruleId
+            vulnerability['level'] = result.level
+            vulnerability['message'] = result.message.text
+            vulnerability['artifactUri'] = result.locations[0].physicalLocation.artifactLocation.uri
+            vulnerability['startLine'] = result.locations[0].physicalLocation.region.startLine
+            vulnerability['endLine'] = result.locations[0].physicalLocation.region.endLine
+            vulnerability['startColumn'] = result.locations[0].physicalLocation.region.startColumn
+            vulnerability['endColumn'] = result.locations[0].physicalLocation.region.endColumn
+            vulnerabilities.add(vulnerability)
+        }
+    }
+    
+    return vulnerabilities
+}
+
+// Function to generate HTML table rows for Snyk vulnerabilities
+def generateSnykHTMLTableRows(snykVulnerabilities) {
+    def tableRows = ""
+    snykVulnerabilities.each { vulnerability ->
+        tableRows += "<tr>"
+        tableRows += "<td>${vulnerability.ruleId}</td>"
+        tableRows += "<td>${vulnerability.level}</td>"
+        tableRows += "<td>${vulnerability.message}</td>"
+        tableRows += "<td>${vulnerability.artifactUri}</td>"
+        tableRows += "<td>${vulnerability.startLine}:${vulnerability.startColumn} - ${vulnerability.endLine}:${vulnerability.endColumn}</td>"
+        tableRows += "</tr>"
+    }
+    return tableRows
+}
 
