@@ -1,3 +1,5 @@
+@Library('AVAR-Shared-Library') _
+
 pipeline {
     agent {
         label 'windows'
@@ -6,6 +8,7 @@ pipeline {
     environment {
         SNYK = tool name: 'Snyk-Installation'
         SNYK_API_TOKEN = credentials('Snyk-API-Token')
+        GITHUB_URL = scm.getUserRemoteConfigs()[0].getUrl().replaceAll(/\.git$/, '')
     }
 
     parameters {
@@ -32,20 +35,16 @@ pipeline {
                 expression { params.OWASP_DEPENDENCY_CHECK == true }
             }
             steps {
-                // Run OWASP Dependency Check
                 dependencyCheck additionalArguments: '--scan \"${WORKSPACE}\" --prettyPrint --format JSON --format XML', odcInstallation: 'Dependency-Check-Installation'
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
 
                 script {
-                    // Extract vulnerability information from OWASP Dependency Check report
-                    def reportFile = "${WORKSPACE}/dependency-check-report.json"
-                    def vulnerabilities = extractOWASPVulnerabilities(reportFile)
+                    def dependencyCheckReport = "${WORKSPACE}/dependency-check-report.json"
+                    def OWASPVulnerabilities = extractOWASPVulnerabilities(dependencyCheckReport)
 
-                    // Generate HTML table for vulnerabilities
-                    def vulnerabilitiesTable = generateHTMLTableRows(vulnerabilities)
+                    def OWASPTableRows = generateOWASPHTMLTableRows(OWASPVulnerabilities)
 
-                    // Store vulnerabilities as a build variable for later use
-                    env.VULNERABILITIES_TABLE = vulnerabilitiesTable
+                    env.OWASP_TABLE = OWASPTableRows
                 }
             }
         }
@@ -63,14 +62,11 @@ pipeline {
                 }
 
                 script {
-                    // Extract Snyk vulnerabilities
-                    def reportFile = "${WORKSPACE}/snyk-report.json"
-                    def snykVulnerabilities = extractSnykVulnerabilities(reportFile)
+                    def snykReport = "${WORKSPACE}/snyk-report.json"
+                    def snykVulnerabilities = extractSnykVulnerabilities(snykReport)
 
-                    // Generate HTML table for Snyk vulnerabilities
                     def snykTableRows = generateSnykHTMLTableRows(snykVulnerabilities)
 
-                    // Store Snyk vulnerabilities as a build variable for later use
                     env.SNYK_TABLE = snykTableRows
                 }
             }
@@ -84,8 +80,26 @@ pipeline {
                 bat """
                     cd C:\\jenkins\\trivy_0.49.0_windows-64bit
                     trivy.exe
-                    trivy fs --scanners vuln,secret,config,license ${WORKSPACE} -f json -o ${WORKSPACE}/trivy-report.json
+                    trivy fs --scanners vuln,secret,misconfig,license ${WORKSPACE} -f json -o ${WORKSPACE}/trivy-report.json
                 """
+
+                script {
+                    def trivyReport = "${WORKSPACE}/trivy-report.json"
+                    def trivyVulnerabilities = extractTrivyVulnerabilities(trivyReport)
+                    def trivyMisconfigurations = extractTrivyMisconfigurations(trivyReport)
+                    def trivySecrets = extractTrivySecrets(trivyReport)
+                    def trivyLicenses = extractTrivyLicenses(trivyReport)
+
+                    def trivyVulnerabilitiesTableRows = generateTrivyVulnerabilitiesHTMLTableRows(trivyVulnerabilities)
+                    def trivyMisconfigurationsTableRows = generateTrivyMisconfigurationsHTMLTableRows(trivyMisconfigurations)
+                    def trivySecretsTableRows = generateTrivySecretsHTMLTableRows(trivySecrets)
+                    def trivyLicensesTableRows = generateTrivyLicensesHTMLTableRows(trivyLicenses)
+
+                    env.TRIVY_VULNERABILITIES_TABLE = trivyVulnerabilitiesTableRows
+                    env.TRIVY_MISCONFIGURATIONS_TABLE = trivyMisconfigurationsTableRows
+                    env.TRIVY_SECRETS_TABLE = trivySecretsTableRows
+                    env.TRIVY_LICENSES_TABLE = trivyLicensesTableRows
+                }
             }
         }
 
@@ -94,18 +108,11 @@ pipeline {
                 echo 'Deploy'
             }
         }
-
-        stage('Clean Workspace') {
-            steps {
-                echo "cleanWs()"
-            }
-        }
     }
 
     post {
         always {
             script {
-                // Send email notification with vulnerability information
                 emailext(
                     to: 'ahdoo.ling010519@gmail.com',
                     mimeType: 'text/html',
@@ -138,11 +145,6 @@ pipeline {
                                     th {
                                         background-color: #f2f2f2;
                                     }
-                                    .status {
-                                        font-size: 24px;
-                                        font-weight: bold;
-                                        color: ${getStatusColor()};
-                                    }
                                     .footer {
                                         margin-top: 20px;
                                         padding-top: 10px;
@@ -164,9 +166,11 @@ pipeline {
                                 <div class="container">
                                     <img src="https://www.jenkins.io/images/logo-title-opengraph.png" alt="Jenkins Icon" class="jenkins-icon">
 
-                                    <p class="status">Build Status: ${currentBuild.currentResult}</p>
+                                    <p class="status" style="font-size: 24px; font-weight: bold; color: ${getStatusColor(currentBuild.currentResult)};">
+                                        Build Status: ${currentBuild.currentResult}
+                                    </p>
                                     
-                                    <h3>Build Info</h3>
+                                    <h2>Build Info</h2>
                                     <table>
                                         <tr>
                                             <th>Job Name</th>
@@ -186,7 +190,7 @@ pipeline {
                                         </tr>
                                     </table>
         
-                                    <h3>Git Changeset</h3>
+                                    <h2>Git Changeset</h2>
                                     <table>
                                         <tr>
                                             <th>Commit ID</th>
@@ -195,10 +199,10 @@ pipeline {
                                             <th>Files</th>
                                             <th>Timestamp</th>
                                         </tr>
-                                        ${getGitChangeSetTable()}
+                                        ${getGitChangeSetTable(GITHUB_URL)}
                                     </table>
 
-                                    <h3>OWASP Dependency Check</h3>
+                                    <h2>OWASP Dependency Check</h2>
                                     <table>
                                         <tr>
                                             <th>File Name</th>
@@ -206,10 +210,10 @@ pipeline {
                                             <th>Severity</th>
                                             <th>Description</th>
                                         </tr>
-                                        ${env.VULNERABILITIES_TABLE ?: "<tr><td colspan=\"4\">No vulnerabilities found</td></tr>"}
+                                        ${env.OWASP_TABLE ?: "<tr><td colspan=\"4\">No vulnerabilities found</td></tr>"}
                                     </table>
 
-                                    <h3>Snyk</h3>
+                                    <h2>Snyk</h2>
                                     <table>
                                         <tr>
                                             <th>Rule ID</th>
@@ -221,8 +225,53 @@ pipeline {
                                         ${env.SNYK_TABLE ?: "<tr><td colspan=\"5\">No vulnerabilities found</td></tr>"}
                                     </table>
 
-                                    <h3>Trivy</h3>
+                                    <h2>Trivy</h2>
+                                    <h3>Vulnerabilities</h3>
                                     <table>
+                                        <tr>
+                                            <th>Target</th>
+                                            <th>Vulnerability ID</th>
+                                            <th>Severity</th>
+                                            <th>Title</th>
+                                            <th>Description</th>
+                                            <th>Package Name</th>
+                                            <th>Installed Version</th>
+                                            <th>Fixed Version</th>
+                                        </tr>
+                                        ${env.TRIVY_VULNERABILITIES_TABLE ?: "<tr><td colspan=\"8\">No vulnerabilities found</td></tr>"}
+                                    </table>
+                                    <h3>Misconfigurations</h3>  
+                                    <table>
+                                        <tr>
+                                            <th>Target</th>
+                                            <th>AVD ID</th>
+                                            <th>Title</th>
+                                            <th>Description</th>
+                                            <th>Resolution</th>
+                                        </tr>
+                                        ${env.TRIVY_MISCONFIGURATIONS_TABLE ?: "<tr><td colspan=\"5\">No misconfigurations found</td></tr>"}
+                                    </table>
+                                    <h3>Secrets</h3>
+                                    <table>
+                                        <tr>
+                                            <th>Target</th>
+                                            <th>Rule ID</th>
+                                            <th>Severity</th>
+                                            <th>Title</th>
+                                            <th>Line</th>
+                                            <th>Match</th>
+                                        </tr>
+                                        ${env.TRIVY_SECRETS_TABLE ?: "<tr><td colspan=\"6\">No secrets found</td></tr>"}
+                                    </table>
+                                    <h3>Licenses</h3>
+                                    <table>
+                                        <tr>
+                                            <th>Package Name</th>
+                                            <th>Severity</th>
+                                            <th>Name</th>
+                                            <th>Confidence</th>
+                                        </tr>
+                                        ${env.TRIVY_LICENSES_TABLE ?: "<tr><td colspan=\"4\">No licenses found</td></tr>"}
                                     </table>
 
                                     <div class="footer">
@@ -239,149 +288,9 @@ pipeline {
                         </html>
                     """
                 )
+                cleanWs()
             }
         }
     }
-}
-
-def getGitChangeSetTable() {
-    def changelogTable = ""
-    def build = currentBuild
-
-    if (build.changeSets.size() > 0) {
-        changelogTable += build.changeSets.collect { cs ->
-            cs.collect { entry ->
-                def formattedTimestamp = new Date(entry.timestamp.toLong()).toString()
-                def id = entry.commitId
-                def files = entry.affectedFiles.collect { file ->
-                    file.path
-                }.join(", ")
-                def author = entry.author.fullName
-                def message = entry.msg
-                def commitUrl = "https://github.com/SHAODOO/vulnerable-node/commit/${id}"
-                "<tr><td><a href=\"${commitUrl}\">${id}</a></td><td>${author}</td><td>${message}</td><td>${files}</td><td>${formattedTimestamp}</td></tr>"
-            }.join('\n')
-        }.join('\n')
-    } else {
-        def buildsWithChangeset = 0
-        while (buildsWithChangeset < 5 && build != null) {
-            if (build.changeSets.size() > 0) {
-                changelogTable += build.changeSets.collect { cs ->
-                    cs.collect { entry ->
-                        def formattedTimestamp = new Date(entry.timestamp.toLong()).toString()
-                        def id = entry.commitId
-                        def files = entry.affectedFiles.collect { file ->
-                            file.path
-                        }.join(", ")
-                        def author = entry.author.fullName
-                        def message = entry.msg
-                        // Construct GitHub commit URL
-                        def commitUrl = "https://github.com/SHAODOO/vulnerable-node/commit/${id}"
-                        "<tr><td><a href=\"${commitUrl}\">${id}</a></td><td>${author}</td><td>${message}</td><td>${files}</td><td>${formattedTimestamp}</td></tr>"
-                    }.join('\n')
-                }.join('\n')
-                buildsWithChangeset++
-            }
-            build = build.previousBuild
-        }
-    }
-
-    if (changelogTable.isEmpty()) {
-        changelogTable = "<tr><td colspan=\"5\">No changesets found</td></tr>"
-    }
-
-    return changelogTable
-}
-
-def getStatusColor() {
-    switch (currentBuild.currentResult) {
-        case 'SUCCESS':
-            return 'green';
-        case 'FAILURE':
-            return 'red';
-        case 'ABORTED':
-            return 'grey';
-        default:
-            return 'black'; // default color
-    }
-}
-
-def extractOWASPVulnerabilities(reportFile) {
-    def vulnerabilities = [:]
-    node {
-        def jsonReport = readFile(file: reportFile)
-        def json = readJSON text: jsonReport
-
-        json.dependencies.findAll { dependency ->
-            dependency.vulnerabilities
-        }.each { dependency ->
-            def fileName = dependency.fileName
-            def dependencyVulnerabilities = dependency.vulnerabilities
-
-            if (dependencyVulnerabilities) {
-                vulnerabilities[fileName] = dependencyVulnerabilities.collect { vuln ->
-                    return [name: vuln.name, severity: vuln.severity, description: vuln.description]
-                }
-            }
-        }
-    }
-
-    return vulnerabilities
-}
-
-def generateHTMLTableRows(vulnerabilities) {
-    def tableRows = ""
-    vulnerabilities.each { fileName, vulns ->        
-        vulns.eachWithIndex { vuln, index ->
-            if (index > 0) {
-                tableRows += "<tr>"
-            }
-            tableRows += "<td>${fileName}</td>"
-            tableRows += "<td>${vuln.name}</td>"
-            tableRows += "<td>${vuln.severity}</td>"
-            tableRows += "<td>${vuln.description}</td>"
-            tableRows += "</tr>"
-        }
-    }
-    return tableRows
-}
-
-// Function to extract Snyk vulnerabilities from the report file
-def extractSnykVulnerabilities(reportFile) {
-    def vulnerabilities = []
-    def reportContent = readFile(file: reportFile)
-    def reportJson = readJSON text: reportContent
-    
-    reportJson.runs.each { run ->
-        run.results.each { result ->
-            def vulnerability = [:]
-            vulnerability['ruleId'] = result.ruleId
-            vulnerability['level'] = result.level
-            vulnerability['message'] = result.message.text
-            vulnerability['artifactUri'] = result.locations[0].physicalLocation.artifactLocation.uri
-            vulnerability['startLine'] = result.locations[0].physicalLocation.region.startLine
-            vulnerability['endLine'] = result.locations[0].physicalLocation.region.endLine
-            vulnerability['startColumn'] = result.locations[0].physicalLocation.region.startColumn
-            vulnerability['endColumn'] = result.locations[0].physicalLocation.region.endColumn
-            vulnerabilities.add(vulnerability)
-        }
-    }
-    
-    return vulnerabilities
-}
-
-// Function to generate HTML table rows for Snyk vulnerabilities
-def generateSnykHTMLTableRows(snykVulnerabilities) {
-    def tableRows = ""
-    snykVulnerabilities.each { vulnerability ->
-        tableRows += "<tr>"
-        tableRows += "<td>${vulnerability.ruleId}</td>"
-        tableRows += "<td>${vulnerability.level}</td>"
-        tableRows += "<td>${vulnerability.message}</td>"
-        tableRows += "<td>${vulnerability.artifactUri}</td>"
-        tableRows += "<td>Ln ${vulnerability.startLine}, Col ${vulnerability.startColumn} - Ln ${vulnerability.endLine}, Col ${vulnerability.endColumn}</td>"
-        tableRows += "</tr>"
-    }
-    return tableRows
 }
 
