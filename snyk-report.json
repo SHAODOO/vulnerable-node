@@ -1,0 +1,2467 @@
+{
+    "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+    "version": "2.1.0",
+    "runs": [
+      {
+        "results": [
+          {
+            "ruleId": "javascript/NoHardcodedPasswords",
+            "ruleIndex": 0,
+            "level": "warning",
+            "message": {
+              "text": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+              "markdown": "Do not hardcode passwords in code. Found hardcoded password used in {0}.",
+              "arguments": [
+                "[password](0)"
+              ]
+            },
+            "locations": [
+              {
+                "physicalLocation": {
+                  "artifactLocation": {
+                    "uri": "dummy.js",
+                    "uriBaseId": "%SRCROOT%"
+                  },
+                  "region": {
+                    "startLine": 12,
+                    "endLine": 12,
+                    "startColumn": 7,
+                    "endColumn": 17
+                  }
+                }
+              }
+            ],
+            "fingerprints": {
+              "0": "6e973847378a2fbe9fd58f67a37ec9f203a4f176140becc93d14c5000648d4dd",
+              "1": "40c5fd92.f12d681e.80768d87.e052b9a9.79a7d027.fcf3002d.ce4a9d89.05489e68.40c5fd92.8a557c25.a3fa85e7.e052b9a9.79a7d027.1ec71ef1.8d3ce4a5.6723ddeb"
+            },
+            "codeFlows": [
+              {
+                "threadFlows": [
+                  {
+                    "locations": [
+                      {
+                        "location": {
+                          "id": 0,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "dummy.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 12,
+                              "endLine": 12,
+                              "startColumn": 7,
+                              "endColumn": 17
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "properties": {
+              "priorityScore": 507,
+              "priorityScoreFactors": [
+                {
+                  "label": true,
+                  "type": "hotFileCodeFlow"
+                },
+                {
+                  "label": true,
+                  "type": "fixExamples"
+                }
+              ],
+              "isAutofixable": false
+            }
+          },
+          {
+            "ruleId": "javascript/Sqli",
+            "ruleIndex": 1,
+            "level": "error",
+            "message": {
+              "text": "Unsanitized input from the HTTP request body flows into one, where it is used in an SQL query. This may result in an SQL Injection vulnerability.",
+              "markdown": "Unsanitized input from {0} {1} into {2}, where it is used in an SQL query. This may result in an SQL Injection vulnerability.",
+              "arguments": [
+                "[the HTTP request body](0)",
+                "[flows](1),(2),(3),(4),(5),(6),(7),(8),(9)",
+                "[one](10)"
+              ]
+            },
+            "locations": [
+              {
+                "physicalLocation": {
+                  "artifactLocation": {
+                    "uri": "routes/login.js",
+                    "uriBaseId": "%SRCROOT%"
+                  },
+                  "region": {
+                    "startLine": 27,
+                    "endLine": 27,
+                    "startColumn": 5,
+                    "endColumn": 9
+                  }
+                }
+              }
+            ],
+            "fingerprints": {
+              "0": "589f55a328779b1dc555d9013520bd18b81db7279555849ba7700f7052e198c0",
+              "1": "839b1d0f.4773f344.607187b5.d7919eeb.9a6f4864.88571d1c.df7e59ba.75aa34e1.f759b1f9.4773f344.bd65d204.08906714.9a6f4864.88571d1c.83265159.75aa34e1"
+            },
+            "codeFlows": [
+              {
+                "threadFlows": [
+                  {
+                    "locations": [
+                      {
+                        "location": {
+                          "id": 0,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/login.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 21,
+                              "endLine": 21,
+                              "startColumn": 20,
+                              "endColumn": 24
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 1,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/login.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 21,
+                              "endLine": 21,
+                              "startColumn": 20,
+                              "endColumn": 24
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 2,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/login.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 21,
+                              "endLine": 21,
+                              "startColumn": 16,
+                              "endColumn": 24
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 3,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/login.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 21,
+                              "endLine": 21,
+                              "startColumn": 9,
+                              "endColumn": 13
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 4,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/login.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 25,
+                              "endLine": 25,
+                              "startColumn": 58,
+                              "endColumn": 62
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 5,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/login.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 27,
+                              "endLine": 27,
+                              "startColumn": 10,
+                              "endColumn": 14
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 6,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/auth.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 4,
+                              "endLine": 4,
+                              "startColumn": 18,
+                              "endColumn": 26
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 7,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/auth.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 7,
+                              "endLine": 7,
+                              "startColumn": 52,
+                              "endColumn": 60
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 8,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/auth.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 7,
+                              "endLine": 7,
+                              "startColumn": 9,
+                              "endColumn": 10
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 9,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/auth.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 9,
+                              "endLine": 9,
+                              "startColumn": 19,
+                              "endColumn": 20
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 10,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/auth.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 9,
+                              "endLine": 9,
+                              "startColumn": 15,
+                              "endColumn": 18
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "properties": {
+              "priorityScore": 825,
+              "priorityScoreFactors": [
+                {
+                  "label": true,
+                  "type": "multipleOccurrence"
+                },
+                {
+                  "label": true,
+                  "type": "hotFileSource"
+                },
+                {
+                  "label": true,
+                  "type": "fixExamples"
+                }
+              ],
+              "isAutofixable": false
+            }
+          },
+          {
+            "ruleId": "javascript/Sqli",
+            "ruleIndex": 1,
+            "level": "error",
+            "message": {
+              "text": "Unsanitized input from the request URL flows into one, where it is used in an SQL query. This may result in an SQL Injection vulnerability.",
+              "markdown": "Unsanitized input from {0} {1} into {2}, where it is used in an SQL query. This may result in an SQL Injection vulnerability.",
+              "arguments": [
+                "[the request URL](0)",
+                "[flows](1),(2),(3),(4),(5),(6),(7),(8),(9),(10)",
+                "[one](11)"
+              ]
+            },
+            "locations": [
+              {
+                "physicalLocation": {
+                  "artifactLocation": {
+                    "uri": "routes/products.js",
+                    "uriBaseId": "%SRCROOT%"
+                  },
+                  "region": {
+                    "startLine": 49,
+                    "endLine": 49,
+                    "startColumn": 17,
+                    "endColumn": 27
+                  }
+                }
+              }
+            ],
+            "fingerprints": {
+              "0": "0cc283bb65246c5774e376b9b4332f6abe0594cdf6931a54ad7ad76c2f984d41",
+              "1": "f77bb1c4.4773f344.607187b5.d7919eeb.c3a1912e.e040797e.df7e59ba.d66579bf.29386b0b.4773f344.9339e9e9.c559ebce.c3a1912e.e040797e.0334236c.b20a940a"
+            },
+            "codeFlows": [
+              {
+                "threadFlows": [
+                  {
+                    "locations": [
+                      {
+                        "location": {
+                          "id": 0,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 45,
+                              "endLine": 45,
+                              "startColumn": 36,
+                              "endColumn": 39
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 1,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 45,
+                              "endLine": 45,
+                              "startColumn": 36,
+                              "endColumn": 39
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 2,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 45,
+                              "endLine": 45,
+                              "startColumn": 22,
+                              "endColumn": 31
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 3,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 45,
+                              "endLine": 45,
+                              "startColumn": 9,
+                              "endColumn": 19
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 4,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 47,
+                              "endLine": 47,
+                              "startColumn": 22,
+                              "endColumn": 32
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 5,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 47,
+                              "endLine": 47,
+                              "startColumn": 9,
+                              "endColumn": 19
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 6,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 49,
+                              "endLine": 49,
+                              "startColumn": 28,
+                              "endColumn": 38
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 7,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 12,
+                              "endLine": 12,
+                              "startColumn": 21,
+                              "endColumn": 31
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 8,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 14,
+                              "endLine": 14,
+                              "startColumn": 53,
+                              "endColumn": 63
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 9,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 14,
+                              "endLine": 14,
+                              "startColumn": 9,
+                              "endColumn": 10
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 10,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 16,
+                              "endLine": 16,
+                              "startColumn": 19,
+                              "endColumn": 20
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 11,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 16,
+                              "endLine": 16,
+                              "startColumn": 15,
+                              "endColumn": 18
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "properties": {
+              "priorityScore": 825,
+              "priorityScoreFactors": [
+                {
+                  "label": true,
+                  "type": "multipleOccurrence"
+                },
+                {
+                  "label": true,
+                  "type": "hotFileSource"
+                },
+                {
+                  "label": true,
+                  "type": "fixExamples"
+                }
+              ],
+              "isAutofixable": false
+            }
+          },
+          {
+            "ruleId": "javascript/Sqli",
+            "ruleIndex": 1,
+            "level": "error",
+            "message": {
+              "text": "Unsanitized input from the request URL flows into one, where it is used in an SQL query. This may result in an SQL Injection vulnerability.",
+              "markdown": "Unsanitized input from {0} {1} into {2}, where it is used in an SQL query. This may result in an SQL Injection vulnerability.",
+              "arguments": [
+                "[the request URL](0)",
+                "[flows](1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),(15),(16),(17),(18),(19)",
+                "[one](20)"
+              ]
+            },
+            "locations": [
+              {
+                "physicalLocation": {
+                  "artifactLocation": {
+                    "uri": "routes/products.js",
+                    "uriBaseId": "%SRCROOT%"
+                  },
+                  "region": {
+                    "startLine": 137,
+                    "endLine": 137,
+                    "startColumn": 17,
+                    "endColumn": 25
+                  }
+                }
+              }
+            ],
+            "fingerprints": {
+              "0": "75cd913b27bd614fece0593f9b35d7b8573777dbccf09d552e55595876b45d8a",
+              "1": "11a45176.4773f344.ea3a49f1.d7919eeb.c3a1912e.e040797e.cd61fc56.1bd7aa18.7b1053bd.4773f344.ea3a49f1.c8688b2b.c3a1912e.e040797e.42227623.1bd7aa18"
+            },
+            "codeFlows": [
+              {
+                "threadFlows": [
+                  {
+                    "locations": [
+                      {
+                        "location": {
+                          "id": 0,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 95,
+                              "endLine": 95,
+                              "startColumn": 32,
+                              "endColumn": 35
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 1,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 95,
+                              "endLine": 95,
+                              "startColumn": 32,
+                              "endColumn": 35
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 2,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 95,
+                              "endLine": 95,
+                              "startColumn": 18,
+                              "endColumn": 27
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 3,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 104,
+                              "endLine": 104,
+                              "startColumn": 13,
+                              "endColumn": 19
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 4,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 109,
+                              "endLine": 109,
+                              "startColumn": 19,
+                              "endColumn": 25
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 5,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 109,
+                              "endLine": 109,
+                              "startColumn": 13,
+                              "endColumn": 17
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 6,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 121,
+                              "endLine": 121,
+                              "startColumn": 22,
+                              "endColumn": 26
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 7,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 126,
+                              "endLine": 126,
+                              "startColumn": 26,
+                              "endColumn": 30
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 8,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 137,
+                              "endLine": 137,
+                              "startColumn": 26,
+                              "endColumn": 30
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 9,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 27,
+                              "endLine": 27,
+                              "startColumn": 19,
+                              "endColumn": 23
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 10,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 30,
+                              "endLine": 30,
+                              "startColumn": 13,
+                              "endColumn": 17
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 11,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 31,
+                              "endLine": 31,
+                              "startColumn": 13,
+                              "endColumn": 17
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 12,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 32,
+                              "endLine": 32,
+                              "startColumn": 13,
+                              "endColumn": 17
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 13,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 33,
+                              "endLine": 33,
+                              "startColumn": 13,
+                              "endColumn": 17
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 14,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 34,
+                              "endLine": 34,
+                              "startColumn": 13,
+                              "endColumn": 17
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 15,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 35,
+                              "endLine": 35,
+                              "startColumn": 13,
+                              "endColumn": 17
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 16,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 36,
+                              "endLine": 36,
+                              "startColumn": 13,
+                              "endColumn": 17
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 17,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 37,
+                              "endLine": 37,
+                              "startColumn": 13,
+                              "endColumn": 17
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 18,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 29,
+                              "endLine": 29,
+                              "startColumn": 9,
+                              "endColumn": 10
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 19,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 40,
+                              "endLine": 40,
+                              "startColumn": 19,
+                              "endColumn": 20
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 20,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 40,
+                              "endLine": 40,
+                              "startColumn": 15,
+                              "endColumn": 18
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "properties": {
+              "priorityScore": 825,
+              "priorityScoreFactors": [
+                {
+                  "label": true,
+                  "type": "multipleOccurrence"
+                },
+                {
+                  "label": true,
+                  "type": "hotFileSource"
+                },
+                {
+                  "label": true,
+                  "type": "fixExamples"
+                }
+              ],
+              "isAutofixable": false
+            }
+          },
+          {
+            "ruleId": "javascript/Sqli",
+            "ruleIndex": 1,
+            "level": "error",
+            "message": {
+              "text": "Unsanitized input from the request URL flows into many, where it is used in an SQL query. This may result in an SQL Injection vulnerability.",
+              "markdown": "Unsanitized input from {0} {1} into {2}, where it is used in an SQL query. This may result in an SQL Injection vulnerability.",
+              "arguments": [
+                "[the request URL](0)",
+                "[flows](1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12)",
+                "[many](13)"
+              ]
+            },
+            "locations": [
+              {
+                "physicalLocation": {
+                  "artifactLocation": {
+                    "uri": "routes/products.js",
+                    "uriBaseId": "%SRCROOT%"
+                  },
+                  "region": {
+                    "startLine": 74,
+                    "endLine": 74,
+                    "startColumn": 17,
+                    "endColumn": 23
+                  }
+                }
+              }
+            ],
+            "fingerprints": {
+              "0": "81315b18cc8b5b90d0f76903895f83c68c4cf1c2078724d8141c49ab00595989",
+              "1": "e758dfe2.4773f344.a2074e4e.d7919eeb.c3a1912e.e040797e.df7e59ba.ed9e332f.29386b0b.4773f344.30f3104b.57e1f472.c3a1912e.e040797e.83265159.5b5a306a"
+            },
+            "codeFlows": [
+              {
+                "threadFlows": [
+                  {
+                    "locations": [
+                      {
+                        "location": {
+                          "id": 0,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 66,
+                              "endLine": 66,
+                              "startColumn": 36,
+                              "endColumn": 39
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 1,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 66,
+                              "endLine": 66,
+                              "startColumn": 36,
+                              "endColumn": 39
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 2,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 66,
+                              "endLine": 66,
+                              "startColumn": 22,
+                              "endColumn": 31
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 3,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 66,
+                              "endLine": 66,
+                              "startColumn": 9,
+                              "endColumn": 19
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 4,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 67,
+                              "endLine": 67,
+                              "startColumn": 17,
+                              "endColumn": 27
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 5,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 67,
+                              "endLine": 67,
+                              "startColumn": 9,
+                              "endColumn": 14
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 6,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 69,
+                              "endLine": 69,
+                              "startColumn": 9,
+                              "endColumn": 14
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 7,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 74,
+                              "endLine": 74,
+                              "startColumn": 24,
+                              "endColumn": 29
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 8,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 19,
+                              "endLine": 19,
+                              "startColumn": 17,
+                              "endColumn": 22
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 9,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 21,
+                              "endLine": 21,
+                              "startColumn": 60,
+                              "endColumn": 65
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 10,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 21,
+                              "endLine": 21,
+                              "startColumn": 99,
+                              "endColumn": 104
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 11,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 21,
+                              "endLine": 21,
+                              "startColumn": 9,
+                              "endColumn": 10
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 12,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 23,
+                              "endLine": 23,
+                              "startColumn": 20,
+                              "endColumn": 21
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 13,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "model/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 23,
+                              "endLine": 23,
+                              "startColumn": 15,
+                              "endColumn": 19
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "properties": {
+              "priorityScore": 825,
+              "priorityScoreFactors": [
+                {
+                  "label": true,
+                  "type": "multipleOccurrence"
+                },
+                {
+                  "label": true,
+                  "type": "hotFileSource"
+                },
+                {
+                  "label": true,
+                  "type": "fixExamples"
+                }
+              ],
+              "isAutofixable": false
+            }
+          },
+          {
+            "ruleId": "javascript/WebCookieSecureDisabledExplicitly",
+            "ruleIndex": 2,
+            "level": "note",
+            "message": {
+              "text": "Cookie has the Secure attribute set to false. Set it to true to protect the cookie from man-in-the-middle attacks.",
+              "markdown": "{0} has the Secure attribute set to {1}. Set it to true to protect the cookie from man-in-the-middle attacks.",
+              "arguments": [
+                "[Cookie](0)",
+                "[false](1)"
+              ]
+            },
+            "locations": [
+              {
+                "physicalLocation": {
+                  "artifactLocation": {
+                    "uri": "app.js",
+                    "uriBaseId": "%SRCROOT%"
+                  },
+                  "region": {
+                    "startLine": 47,
+                    "endLine": 47,
+                    "startColumn": 3,
+                    "endColumn": 9
+                  }
+                }
+              }
+            ],
+            "fingerprints": {
+              "0": "a2d6a45c3fa4849d09b564be9e0a2ada25dda80594aa72f00cb98669c33e62c3",
+              "1": "ca516799.4773f344.21273b8b.59162423.79a7d027.fcf3002d.bb0395bd.f5919d50.fc3065be.4773f344.21273b8b.59162423.79a7d027.5fce695c.df7e59ba.f5919d50"
+            },
+            "codeFlows": [
+              {
+                "threadFlows": [
+                  {
+                    "locations": [
+                      {
+                        "location": {
+                          "id": 0,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "app.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 47,
+                              "endLine": 47,
+                              "startColumn": 3,
+                              "endColumn": 9
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 1,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "app.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 48,
+                              "endLine": 48,
+                              "startColumn": 13,
+                              "endColumn": 18
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "properties": {
+              "priorityScore": 407,
+              "priorityScoreFactors": [
+                {
+                  "label": true,
+                  "type": "hotFileSource"
+                },
+                {
+                  "label": true,
+                  "type": "fixExamples"
+                }
+              ],
+              "isAutofixable": false
+            }
+          },
+          {
+            "ruleId": "javascript/OR",
+            "ruleIndex": 3,
+            "level": "warning",
+            "message": {
+              "text": "Unsanitized input from the HTTP request body flows into redirect, where it is used as an URL to redirect the user. This may result in an Open Redirect vulnerability.",
+              "markdown": "Unsanitized input from {0} {1} into {2}, where it is used as an URL to redirect the user. This may result in an Open Redirect vulnerability.",
+              "arguments": [
+                "[the HTTP request body](0)",
+                "[flows](1),(2),(3),(4),(5),(6)",
+                "[redirect](7)"
+              ]
+            },
+            "locations": [
+              {
+                "physicalLocation": {
+                  "artifactLocation": {
+                    "uri": "routes/login.js",
+                    "uriBaseId": "%SRCROOT%"
+                  },
+                  "region": {
+                    "startLine": 36,
+                    "endLine": 36,
+                    "startColumn": 17,
+                    "endColumn": 25
+                  }
+                }
+              }
+            ],
+            "fingerprints": {
+              "0": "46b41f07aeb9a0dd32be9fe8db54127cc760773dec516304478d4688bc929dc7",
+              "1": "64cc9191.4773f344.1ec824b2.7da15f0a.ef9f7d82.8020cfdf.cd61fc56.ed9e332f.f759b1f9.4773f344.1ec824b2.08906714.ef9f7d82.8020cfdf.83265159.ed9e332f"
+            },
+            "codeFlows": [
+              {
+                "threadFlows": [
+                  {
+                    "locations": [
+                      {
+                        "location": {
+                          "id": 0,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/login.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 23,
+                              "endLine": 23,
+                              "startColumn": 25,
+                              "endColumn": 29
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 1,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/login.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 23,
+                              "endLine": 23,
+                              "startColumn": 25,
+                              "endColumn": 29
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 2,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/login.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 23,
+                              "endLine": 23,
+                              "startColumn": 21,
+                              "endColumn": 29
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 3,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/login.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 23,
+                              "endLine": 23,
+                              "startColumn": 9,
+                              "endColumn": 18
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 4,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/login.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 32,
+                              "endLine": 32,
+                              "startColumn": 17,
+                              "endColumn": 26
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 5,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/login.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 32,
+                              "endLine": 32,
+                              "startColumn": 43,
+                              "endColumn": 52
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 6,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/login.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 36,
+                              "endLine": 36,
+                              "startColumn": 26,
+                              "endColumn": 35
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 7,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/login.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 36,
+                              "endLine": 36,
+                              "startColumn": 17,
+                              "endColumn": 25
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "properties": {
+              "priorityScore": 557,
+              "priorityScoreFactors": [
+                {
+                  "label": true,
+                  "type": "hotFileSource"
+                },
+                {
+                  "label": true,
+                  "type": "fixExamples"
+                }
+              ],
+              "isAutofixable": false
+            }
+          },
+          {
+            "ruleId": "javascript/DisablePoweredBy",
+            "ruleIndex": 4,
+            "level": "warning",
+            "message": {
+              "text": "Disable X-Powered-By header for your Express app (consider using Helmet middleware), because it exposes information about the used framework to potential attackers.",
+              "markdown": "Disable X-Powered-By header for your {0} (consider using Helmet middleware), because it exposes information about the used framework to potential attackers.",
+              "arguments": [
+                "[Express app](0)"
+              ]
+            },
+            "locations": [
+              {
+                "physicalLocation": {
+                  "artifactLocation": {
+                    "uri": "app.js",
+                    "uriBaseId": "%SRCROOT%"
+                  },
+                  "region": {
+                    "startLine": 18,
+                    "endLine": 18,
+                    "startColumn": 11,
+                    "endColumn": 18
+                  }
+                }
+              }
+            ],
+            "fingerprints": {
+              "0": "c96b5371d3ba476bd8dc9a39e78e9382d21ee0d780fd2dd4c51d4c974e0409b9",
+              "1": "ae77ea27.4773f344.607187b5.d7919eeb.a1fb1152.5fce695c.fee35010.89d75565.ae77ea27.4773f344.cb088280.c559ebce.f30fb760.49b28873.7b86ed34.83642794"
+            },
+            "codeFlows": [
+              {
+                "threadFlows": [
+                  {
+                    "locations": [
+                      {
+                        "location": {
+                          "id": 0,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "app.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 18,
+                              "endLine": 18,
+                              "startColumn": 11,
+                              "endColumn": 18
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "properties": {
+              "priorityScore": 557,
+              "priorityScoreFactors": [
+                {
+                  "label": true,
+                  "type": "hotFileSource"
+                },
+                {
+                  "label": true,
+                  "type": "fixExamples"
+                }
+              ],
+              "isAutofixable": false
+            }
+          },
+          {
+            "ruleId": "javascript/HardcodedNonCryptoSecret",
+            "ruleIndex": 5,
+            "level": "error",
+            "message": {
+              "text": "Avoid hardcoding values that are meant to be secret. Found a hardcoded string used in express-session.",
+              "markdown": "Avoid hardcoding values that are meant to be secret. Found {0} used in {1}.",
+              "arguments": [
+                "[a hardcoded string](0)",
+                "[express-session](1)"
+              ]
+            },
+            "locations": [
+              {
+                "physicalLocation": {
+                  "artifactLocation": {
+                    "uri": "app.js",
+                    "uriBaseId": "%SRCROOT%"
+                  },
+                  "region": {
+                    "startLine": 45,
+                    "endLine": 45,
+                    "startColumn": 9,
+                    "endColumn": 16
+                  }
+                }
+              }
+            ],
+            "fingerprints": {
+              "0": "8d672ccd53f4f8f1d8e4ae5524d19e840d45ccb9064db70d87c7cfce507f1e4a",
+              "1": "fc3065be.4773f344.607187b5.e052b9a9.79a7d027.2c03bdb2.a56a8b5b.3cee0341.fc3065be.4773f344.44eded10.d7919eeb.79a7d027.5fce695c.48237d02.f5919d50"
+            },
+            "codeFlows": [
+              {
+                "threadFlows": [
+                  {
+                    "locations": [
+                      {
+                        "location": {
+                          "id": 0,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "app.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 46,
+                              "endLine": 46,
+                              "startColumn": 11,
+                              "endColumn": 66
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 1,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "app.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 45,
+                              "endLine": 45,
+                              "startColumn": 9,
+                              "endColumn": 16
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "properties": {
+              "priorityScore": 807,
+              "priorityScoreFactors": [
+                {
+                  "label": true,
+                  "type": "hotFileSource"
+                },
+                {
+                  "label": true,
+                  "type": "fixExamples"
+                }
+              ],
+              "isAutofixable": false
+            }
+          },
+          {
+            "ruleId": "javascript/HTTPSourceWithUncheckedType",
+            "ruleIndex": 6,
+            "level": "note",
+            "message": {
+              "text": "The type of this object, coming from body and the value of its substr property can be controlled by the user. An attacker may craft the properties of the object to crash the application or bypass its logic. Consider checking the type of the object.",
+              "markdown": "The type of this {0}, coming from {1} and the value of its {2} property can be controlled by the user. An attacker may craft the properties of the object to crash the application or bypass its logic. Consider checking the type of the object.",
+              "arguments": [
+                "[object](0)",
+                "[body](1)",
+                "[substr](2)"
+              ]
+            },
+            "locations": [
+              {
+                "physicalLocation": {
+                  "artifactLocation": {
+                    "uri": "routes/products.js",
+                    "uriBaseId": "%SRCROOT%"
+                  },
+                  "region": {
+                    "startLine": 116,
+                    "endLine": 116,
+                    "startColumn": 33,
+                    "endColumn": 39
+                  }
+                }
+              }
+            ],
+            "fingerprints": {
+              "0": "ec49ca134880359f050db3ecba4afcb78b1e5408b603cb665bf101e725015038",
+              "1": "5a562d4f.4773f344.ec4f7ee2.c8688b2b.79a7d027.f8890b3c.877b899d.3b574405.7b1053bd.4773f344.ec4f7ee2.08906714.79a7d027.f8890b3c.42227623.ad9b813a"
+            },
+            "codeFlows": [
+              {
+                "threadFlows": [
+                  {
+                    "locations": [
+                      {
+                        "location": {
+                          "id": 0,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 116,
+                              "endLine": 116,
+                              "startColumn": 20,
+                              "endColumn": 32
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 1,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 97,
+                              "endLine": 97,
+                              "startColumn": 22,
+                              "endColumn": 26
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 2,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 116,
+                              "endLine": 116,
+                              "startColumn": 33,
+                              "endColumn": 39
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "properties": {
+              "priorityScore": 413,
+              "priorityScoreFactors": [
+                {
+                  "label": true,
+                  "type": "multipleOccurrence"
+                },
+                {
+                  "label": true,
+                  "type": "hotFileSource"
+                },
+                {
+                  "label": true,
+                  "type": "fixExamples"
+                }
+              ],
+              "isAutofixable": false
+            }
+          },
+          {
+            "ruleId": "javascript/HTTPSourceWithUncheckedType",
+            "ruleIndex": 6,
+            "level": "note",
+            "message": {
+              "text": "The type of this object, coming from body and the value of its length property can be controlled by the user. An attacker may craft the properties of the object to crash the application or bypass its logic. Consider checking the type of the object.",
+              "markdown": "The type of this {0}, coming from {1} and the value of its {2} property can be controlled by the user. An attacker may craft the properties of the object to crash the application or bypass its logic. Consider checking the type of the object.",
+              "arguments": [
+                "[object](0)",
+                "[body](1)",
+                "[length](2)"
+              ]
+            },
+            "locations": [
+              {
+                "physicalLocation": {
+                  "artifactLocation": {
+                    "uri": "routes/products.js",
+                    "uriBaseId": "%SRCROOT%"
+                  },
+                  "region": {
+                    "startLine": 116,
+                    "endLine": 116,
+                    "startColumn": 56,
+                    "endColumn": 62
+                  }
+                }
+              }
+            ],
+            "fingerprints": {
+              "0": "ec49ca134880359f050db3ecba4afcb78b1e5408b603cb665bf101e725015038",
+              "1": "5a562d4f.4773f344.607187b5.c8688b2b.3f452f8c.f8890b3c.96ea21a8.ed9e332f.7b1053bd.4773f344.b7007fb3.08906714.3f452f8c.f8890b3c.42227623.ad9b813a"
+            },
+            "codeFlows": [
+              {
+                "threadFlows": [
+                  {
+                    "locations": [
+                      {
+                        "location": {
+                          "id": 0,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 116,
+                              "endLine": 116,
+                              "startColumn": 43,
+                              "endColumn": 55
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 1,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 97,
+                              "endLine": 97,
+                              "startColumn": 22,
+                              "endColumn": 26
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 2,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 116,
+                              "endLine": 116,
+                              "startColumn": 56,
+                              "endColumn": 62
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "properties": {
+              "priorityScore": 413,
+              "priorityScoreFactors": [
+                {
+                  "label": true,
+                  "type": "multipleOccurrence"
+                },
+                {
+                  "label": true,
+                  "type": "hotFileSource"
+                },
+                {
+                  "label": true,
+                  "type": "fixExamples"
+                }
+              ],
+              "isAutofixable": false
+            }
+          },
+          {
+            "ruleId": "javascript/UseCsurfForExpress",
+            "ruleIndex": 7,
+            "level": "warning",
+            "message": {
+              "text": "CSRF protection is disabled for your Express app. This allows the attackers to execute requests on a user's behalf.",
+              "markdown": "CSRF protection is disabled for your {0}. This allows the attackers to execute requests on a user's behalf.",
+              "arguments": [
+                "[Express app](0)"
+              ]
+            },
+            "locations": [
+              {
+                "physicalLocation": {
+                  "artifactLocation": {
+                    "uri": "app.js",
+                    "uriBaseId": "%SRCROOT%"
+                  },
+                  "region": {
+                    "startLine": 18,
+                    "endLine": 18,
+                    "startColumn": 11,
+                    "endColumn": 18
+                  }
+                }
+              }
+            ],
+            "fingerprints": {
+              "0": "cf2cc16747c679ea76906171c32bfa4d86819847cfc76ec894b3f7efae7ddb9a",
+              "1": "ae77ea27.4773f344.607187b5.d7919eeb.a1fb1152.5fce695c.fee35010.89d75565.ae77ea27.4773f344.cb088280.c559ebce.f30fb760.49b28873.7b86ed34.83642794"
+            },
+            "codeFlows": [
+              {
+                "threadFlows": [
+                  {
+                    "locations": [
+                      {
+                        "location": {
+                          "id": 0,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "app.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 18,
+                              "endLine": 18,
+                              "startColumn": 11,
+                              "endColumn": 18
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "properties": {
+              "priorityScore": 557,
+              "priorityScoreFactors": [
+                {
+                  "label": true,
+                  "type": "hotFileSource"
+                },
+                {
+                  "label": true,
+                  "type": "fixExamples"
+                }
+              ],
+              "isAutofixable": false
+            }
+          },
+          {
+            "ruleId": "javascript/NoRateLimitingForExpensiveWebOperation",
+            "ruleIndex": 8,
+            "level": "warning",
+            "message": {
+              "text": "This endpoint handler performs a file system operation and does not use a rate-limiting mechanism. It may enable the attackers to perform Denial-of-service attacks. Consider using a rate-limiting middleware such as express-limit.",
+              "markdown": "This {0} performs {1} and does not use a rate-limiting mechanism. It may enable the attackers to perform Denial-of-service attacks. Consider using a rate-limiting middleware such as express-limit.",
+              "arguments": [
+                "[endpoint handler](0)",
+                "[a file system operation](1)"
+              ]
+            },
+            "locations": [
+              {
+                "physicalLocation": {
+                  "artifactLocation": {
+                    "uri": "routes/login.js",
+                    "uriBaseId": "%SRCROOT%"
+                  },
+                  "region": {
+                    "startLine": 10,
+                    "endLine": 15,
+                    "startColumn": 22,
+                    "endColumn": 2
+                  }
+                }
+              }
+            ],
+            "fingerprints": {
+              "0": "b63feafccde9f53168b96332cc1a4cbf9dfb843d192de1648b7b78530f3e42b6",
+              "1": "92e26ef2.4773f344.607187b5.c559ebce.fd1fa73f.5fce695c.83265159.89d75565.92e26ef2.4773f344.607187b5.c559ebce.b6be8b13.5fce695c.83265159.89d75565"
+            },
+            "codeFlows": [
+              {
+                "threadFlows": [
+                  {
+                    "locations": [
+                      {
+                        "location": {
+                          "id": 0,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/login.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 10,
+                              "endLine": 15,
+                              "startColumn": 22,
+                              "endColumn": 2
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 1,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/login.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 14,
+                              "endLine": 14,
+                              "startColumn": 9,
+                              "endColumn": 15
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "properties": {
+              "priorityScore": 575,
+              "priorityScoreFactors": [
+                {
+                  "label": true,
+                  "type": "multipleOccurrence"
+                },
+                {
+                  "label": true,
+                  "type": "hotFileSource"
+                },
+                {
+                  "label": true,
+                  "type": "fixExamples"
+                }
+              ],
+              "isAutofixable": false
+            }
+          },
+          {
+            "ruleId": "javascript/NoRateLimitingForExpensiveWebOperation",
+            "ruleIndex": 8,
+            "level": "warning",
+            "message": {
+              "text": "This endpoint handler performs a file system operation and does not use a rate-limiting mechanism. It may enable the attackers to perform Denial-of-service attacks. Consider using a rate-limiting middleware such as express-limit.",
+              "markdown": "This {0} performs {1} and does not use a rate-limiting mechanism. It may enable the attackers to perform Denial-of-service attacks. Consider using a rate-limiting middleware such as express-limit.",
+              "arguments": [
+                "[endpoint handler](0)",
+                "[a file system operation](1)"
+              ]
+            },
+            "locations": [
+              {
+                "physicalLocation": {
+                  "artifactLocation": {
+                    "uri": "routes/products.js",
+                    "uriBaseId": "%SRCROOT%"
+                  },
+                  "region": {
+                    "startLine": 62,
+                    "endLine": 86,
+                    "startColumn": 32,
+                    "endColumn": 2
+                  }
+                }
+              }
+            ],
+            "fingerprints": {
+              "0": "68092c219f1c09d7db7b88181b27c671d531af8352e98fe482d0cc13e5f7b00f",
+              "1": "e50e6061.4773f344.4f4208cc.c559ebce.fd1fa73f.5fce695c.83265159.89d75565.e50e6061.4773f344.4f4208cc.c559ebce.fd1fa73f.5fce695c.83265159.06822745"
+            },
+            "codeFlows": [
+              {
+                "threadFlows": [
+                  {
+                    "locations": [
+                      {
+                        "location": {
+                          "id": 0,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 62,
+                              "endLine": 86,
+                              "startColumn": 32,
+                              "endColumn": 2
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 1,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "routes/products.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 70,
+                              "endLine": 70,
+                              "startColumn": 13,
+                              "endColumn": 19
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "properties": {
+              "priorityScore": 575,
+              "priorityScoreFactors": [
+                {
+                  "label": true,
+                  "type": "multipleOccurrence"
+                },
+                {
+                  "label": true,
+                  "type": "hotFileSource"
+                },
+                {
+                  "label": true,
+                  "type": "fixExamples"
+                }
+              ],
+              "isAutofixable": false
+            }
+          },
+          {
+            "ruleId": "javascript/NoRateLimitingForExpensiveWebOperation",
+            "ruleIndex": 8,
+            "level": "warning",
+            "message": {
+              "text": "This endpoint handler performs a file system operation and does not use a rate-limiting mechanism. It may enable the attackers to perform Denial-of-service attacks. Consider using a rate-limiting middleware such as express-limit.",
+              "markdown": "This {0} performs {1} and does not use a rate-limiting mechanism. It may enable the attackers to perform Denial-of-service attacks. Consider using a rate-limiting middleware such as express-limit.",
+              "arguments": [
+                "[endpoint handler](0)",
+                "[a file system operation](1)"
+              ]
+            },
+            "locations": [
+              {
+                "physicalLocation": {
+                  "artifactLocation": {
+                    "uri": "app.js",
+                    "uriBaseId": "%SRCROOT%"
+                  },
+                  "region": {
+                    "startLine": 71,
+                    "endLine": 77,
+                    "startColumn": 11,
+                    "endColumn": 4
+                  }
+                }
+              }
+            ],
+            "fingerprints": {
+              "0": "b26a745bd4ced3ee66ac7db78f72f9244ef95a03b9ad2407fe677f4f48ffc5ee",
+              "1": "62de687f.4773f344.44eded10.c559ebce.fd1fa73f.37110c89.83265159.d5de5421.ae77ea27.4773f344.eff3b32f.c559ebce.fd1fa73f.5fce695c.83265159.d5de5421"
+            },
+            "codeFlows": [
+              {
+                "threadFlows": [
+                  {
+                    "locations": [
+                      {
+                        "location": {
+                          "id": 0,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "app.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 71,
+                              "endLine": 77,
+                              "startColumn": 11,
+                              "endColumn": 4
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 1,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "app.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 73,
+                              "endLine": 73,
+                              "startColumn": 9,
+                              "endColumn": 15
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "properties": {
+              "priorityScore": 575,
+              "priorityScoreFactors": [
+                {
+                  "label": true,
+                  "type": "multipleOccurrence"
+                },
+                {
+                  "label": true,
+                  "type": "hotFileSource"
+                },
+                {
+                  "label": true,
+                  "type": "fixExamples"
+                }
+              ],
+              "isAutofixable": false
+            }
+          },
+          {
+            "ruleId": "javascript/NoRateLimitingForExpensiveWebOperation",
+            "ruleIndex": 8,
+            "level": "warning",
+            "message": {
+              "text": "This endpoint handler performs a file system operation and does not use a rate-limiting mechanism. It may enable the attackers to perform Denial-of-service attacks. Consider using a rate-limiting middleware such as express-limit.",
+              "markdown": "This {0} performs {1} and does not use a rate-limiting mechanism. It may enable the attackers to perform Denial-of-service attacks. Consider using a rate-limiting middleware such as express-limit.",
+              "arguments": [
+                "[endpoint handler](0)",
+                "[a file system operation](1)"
+              ]
+            },
+            "locations": [
+              {
+                "physicalLocation": {
+                  "artifactLocation": {
+                    "uri": "app.js",
+                    "uriBaseId": "%SRCROOT%"
+                  },
+                  "region": {
+                    "startLine": 82,
+                    "endLine": 88,
+                    "startColumn": 9,
+                    "endColumn": 2
+                  }
+                }
+              }
+            ],
+            "fingerprints": {
+              "0": "fe26be11998ef3bb10370582ee20c72ea649b9d82d9d2ab10309b6d310aae40b",
+              "1": "ae77ea27.4773f344.44eded10.c559ebce.fd1fa73f.5fce695c.83265159.d5de5421.ae77ea27.4773f344.eff3b32f.c559ebce.fd1fa73f.5fce695c.83265159.d5de5421"
+            },
+            "codeFlows": [
+              {
+                "threadFlows": [
+                  {
+                    "locations": [
+                      {
+                        "location": {
+                          "id": 0,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "app.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 82,
+                              "endLine": 88,
+                              "startColumn": 9,
+                              "endColumn": 2
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "location": {
+                          "id": 1,
+                          "physicalLocation": {
+                            "artifactLocation": {
+                              "uri": "app.js",
+                              "uriBaseId": "%SRCROOT%"
+                            },
+                            "region": {
+                              "startLine": 84,
+                              "endLine": 84,
+                              "startColumn": 7,
+                              "endColumn": 13
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "properties": {
+              "priorityScore": 575,
+              "priorityScoreFactors": [
+                {
+                  "label": true,
+                  "type": "multipleOccurrence"
+                },
+                {
+                  "label": true,
+                  "type": "hotFileSource"
+                },
+                {
+                  "label": true,
+                  "type": "fixExamples"
+                }
+              ],
+              "isAutofixable": false
+            }
+          }
+        ],
+        "properties": {
+          "coverage": [
+            {
+              "isSupported": true,
+              "lang": "JavaScript",
+              "files": 13,
+              "type": "SUPPORTED"
+            },
+            {
+              "isSupported": true,
+              "lang": "EJS",
+              "files": 8,
+              "type": "SUPPORTED"
+            },
+            {
+              "isSupported": true,
+              "lang": "XML",
+              "files": 1,
+              "type": "SUPPORTED"
+            }
+          ]
+        }
+      }
+    ]
+  }
